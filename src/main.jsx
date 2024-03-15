@@ -34,7 +34,7 @@ const router = createBrowserRouter([
     element : <AccountProfilePage/>
   },
   {
-    path : "/welcomePage",
+    path : "/welcome",
     element : <WelcomePage/>
   },
   {
