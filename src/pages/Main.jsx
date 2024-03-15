@@ -1,10 +1,8 @@
 
-function App() {
+export default function MainPage() {
   /**@type{string}*/
-  const hw = "Hello world"
+  const hw = "Main Page"
   return (
     <h1 className="text-3xl">{hw}</h1>
   )
 }
-
-export default App
