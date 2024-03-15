@@ -1,10 +1,9 @@
-import './App.css'
 
 function App() {
   /**@type{string}*/
   const hw = "Hello world"
   return (
-    <h1>{hw}</h1>
+    <h1 className="text-3xl">{hw}</h1>
   )
 }
 
