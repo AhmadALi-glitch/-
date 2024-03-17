@@ -10,6 +10,7 @@ import Frame5Page from './pages/Frame5'
 import AccountProfilePage from './pages/AccountProfile'
 import WelcomePage from './pages/Welcome'
 import SignupPage from './pages/Signup'
+import GuidePage from './pages/Guide'
 
 const router = createBrowserRouter([
   {
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
   {
     path : "/signup",
     element : <SignupPage/>
+  },
+  {
+    path : "/guide",
+    element : <GuidePage/>
   },
 ]);
 
