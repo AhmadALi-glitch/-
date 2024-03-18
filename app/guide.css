@@ -68,11 +68,29 @@ a {
 .guide-page {
   background-color: #333;
   backdrop-filter: blur(120px);
+  overflow-x: hidden;
 }
+
 .guide-page .page-wrapper {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
+  position: relative;
+  z-index: 1;
+}
+
+.guide-page .page-wrapper::after {
+  content: "";
+  background-color: #C9DF8A;
+  width: 50vw;
+  height: 35vw;
+  border-radius: 50%;
+  position: absolute;
+  left: -100px;
+  bottom: 0;
+  z-index: -1;
+  opacity: 0.2;
+  filter: blur(100px);
 }
 
 .guide-page .content {
@@ -87,8 +105,9 @@ a {
 }
 
 .guide-page .guide-sidebar {
-  background-image: linear-gradient(60deg, #333, rgb(201, 223, 138, 0.5));
+  background-color: rgb(201, 223, 138, 0.05);
   width: 348px;
+  border: 1px solid rgb(201, 223, 138, 0.2);
   border-radius: 30px;
   position: sticky;
   top: 20px;
@@ -123,7 +142,7 @@ a {
   width: 100%;
   padding-bottom: 10px;
   border-bottom: 2px solid #333;
-  margin-bottom: 50px;
+  margin-bottom: 150px;
 }
 
 .guide-page .guide-sidebar .body input::placeholder {
