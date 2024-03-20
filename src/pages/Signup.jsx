@@ -90,5 +90,5 @@ function ToggleGroupDemo() {
         طالب
       </ToggleGroupItem>
     </ToggleGroup>
-  )
+  );
 }
