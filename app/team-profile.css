@@ -1,0 +1,70 @@
+/* Start Team Profile Page */
+.team-profile-page .team-img {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: 3px solid rgb(201, 223, 138, 0.7);
+  box-shadow: 0 10px 10px 0 rgb(0 0 0 / 50%);
+}
+
+.team-profile-page .info-list li {
+  padding-right: 0 !important;
+}
+
+.team-profile-page .members {
+  margin-top: 35px;
+}
+
+.team-profile-page .members h3 {
+  font-size: 22px;
+  font-weight: 500;
+  margin-bottom: 15px;
+}
+
+.team-profile-page .members .members-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px;
+}
+
+.team-profile-page .members .members-wrapper img {
+  width: 43px;
+  height: 43px;
+  padding: 3px;
+  border: 2px solid rgb(201, 223, 138, 0.7);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.team-profile-page .header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 30px;
+}
+
+.team-profile-page .header .banners {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.team-profile-page .header .banners img {
+  width: 26px;
+}
+
+/* Mobile Screens */
+@media (max-width: 767px) {
+  .team-profile-page .team-img {
+    max-width: 250px;
+    margin: 0 auto;
+  }
+  .team-profile-page .members .members-wrapper,
+  .team-profile-page .header,
+  .team-profile-page .header .banners {
+    justify-content: center;
+  }
+}
+/* End Team Profile Page */
