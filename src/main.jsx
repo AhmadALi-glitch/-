@@ -11,6 +11,7 @@ import SignupPage from './pages/Signup'
 import GuidePage from './pages/Guide'
 import EventPage from './pages/Event'
 import { Flag, House, UserCircle, UsersThree } from 'phosphor-react'
+import LoadingPage from './pages/loadingPage'
 
 const router = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
     path : "/event",
     element : <EventPage/>
   },
+  {
+    path: '/loading',
+    element : <LoadingPage />
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
