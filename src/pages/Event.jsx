@@ -7,7 +7,8 @@ import { PopoverContent, PopoverTrigger } from "@radix-ui/react-popover"
 import { Checks } from "phosphor-react"
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuSeparator, DropdownMenuItem, DropdownMenuLabel } from "@radix-ui/react-dropdown-menu"
 import { Button } from "@/components/ui/button"
-
+import { useInView } from "react-intersection-observer"
+import { Tooltip, TooltipProvider, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 
 export default function EventPage() {
 
@@ -33,7 +34,7 @@ export default function EventPage() {
                     checked: false,
                     title: "develop ai model",
                     description: 'we made it !',
-                    create_date: 1710001116417,
+                    create_date: 1710001116417 + dayInMs* 12,
                     executors: []
                 },
                 {
@@ -241,13 +242,29 @@ export default function EventPage() {
 
     console.log(checkpointsStatus)
 
+    let [checkpointModal, setCheckpointModal] = useState(false);
+    
+    let [ref, inView, entry] = useInView()
+    
+
     return (
         <>
+
+            {
+                checkpointModal ? 
+                    <div className="fixed w-full h-full z-40 bg-transparent backdrop-blur-sm text-[#7de64d65] text-2xl flex items-center justify-center">
+                        <button onClick={() => setCheckpointModal(false)}>
+                            exit
+                        </button>
+                    </div> : 
+                    <></>
+            }
+
             <div className="h-lvh overflow-auto bg-black flex items-center justify-center">
                 <div className="max-w-[70%] max-h-[90%] overflow-auto bg-black ">
                 <table className="p-7 w-full" >
-                    <thead className="sticky">
-                        <th className="sticky min-w-40 pl-2 pr-2 pt-8 pb-8 text-center">EventDays/Teams</th>
+                    <thead className="sticky -top-1 backdrop-blur-sm z-20">
+                        <th ref={ref} className="min-w-40 pl-2 pr-2 pt-8 pb-8 text-center">EventDays/Teams</th>
                         {
                             Object.keys(dates).map((date) => {
                                 return <>
@@ -268,23 +285,55 @@ export default function EventPage() {
                             teams.map((team) => {
                                 return <>
                                     <tr>
-                                        <td className="min-w-44 h-36 pl-3 text-center">
-                                            <div className="team-name flex items-center justify-center rounded-3xl min-h-[100%] border-2 border-[#7de64d54]">
-                                                {team.name}
+                                        
+                                        <td style={{transition: 'all ease-in .2s'}} className={ `${inView ? 'min-w-44 h-36 pl-3 text-center' : 'min-w-7 max-w-5 sticky right-0 pt-24 '} ` }>
+                                            <div className={ `team-name flex items-center rounded-3xl min-h-[100%] ${inView ? 'border-2 border-[#7de64d54] justify-center ' : 'justify-start'}` }>
+                                            <div className={ `team-name-minimized p-1 pr-2 pl-2 rounded-full text-sm ${ !inView ? 'font-extrabold text-[#7de64d54]' : ''} ` }>
+                                                    {team.name}
+                                                </div>
                                             </div>
                                         </td>
+                                        
                                         {
                                             Object.keys(dates).map((date) => {
                                                 return (
                                                     new Date(+Date.now()).toISOString().split('T')[0] > new Date(+date).toISOString().split('T')[0] ?
                                                         <td className="checkpoint_td relative h-14 text-center min-h-[100%] pt-6 pb-6">
 
-                                                            <div className="chekpointsStats  absolute top-8 left-4">
-                                                                {Object.keys(checkpointsStatus).includes(`${date}|${team.id}`) ? 
-                                                                <div className="bg-[#7de64d65] text-center pr-1 pl-1 h-5 w-5 cursor-pointer border-2 text-xs rounded-3xl border-[#7de64d65]">
-                                                                    { checkpointsStatus[`${date}|${team.id}`][1] == 0 ? <Checks className="border-2 rounded-full backdrop-blur-2xl border-dotted border-[#7de64d65]" fontSize={20}/> : checkpointsStatus[`${date}|${team.id}`][1]}
-                                                                </div>
-                                                                 : ``
+                                                            <div className="chekpointsStats absolute top-8 left-4">
+                                                                {
+                                                                    Object.keys(checkpointsStatus).includes(`${date}|${team.id}`) ? 
+                                                                        <div className="bg-[#7de64d65] text-center pr-1 pl-1 h-5 w-5 cursor-pointer border-2 text-xs rounded-3xl border-[#7de64d65]">
+                                                                            { 
+                                                                                checkpointsStatus[`${date}|${team.id}`][1] == 0 ?
+                                                                                <>
+                                                                                    <TooltipProvider>
+                                                                                        <Tooltip delayDuration={0}>
+                                                                                            <TooltipTrigger >
+                                                                                                <Checks className="border-2 rounded-full backdrop-blur-2xl border-dotted border-[#7de64d65]" fontSize={20}/>
+                                                                                            </TooltipTrigger>
+                                                                                            <TooltipContent>
+                                                                                                تم التحقق من كل نقاط التقدم 
+                                                                                            </TooltipContent>
+                                                                                        </Tooltip>
+                                                                                    </TooltipProvider>
+                                                                                </>
+                                                                                : <>
+
+                                                                                    <TooltipProvider>
+                                                                                        <Tooltip delayDuration={0}>
+                                                                                            <TooltipTrigger>
+                                                                                                {checkpointsStatus[`${date}|${team.id}`][1]}
+                                                                                            </TooltipTrigger>
+                                                                                            <TooltipContent>
+                                                                                               {checkpointsStatus[`${date}|${team.id}`][1]}  نقطة تقدم غير متحقق منها
+                                                                                            </TooltipContent>
+                                                                                        </Tooltip>
+                                                                                    </TooltipProvider>
+                                                                                </>
+                                                                            }
+                                                                        </div>
+                                                                    : ``
                                                                  }
                                                             </div>
 
@@ -297,28 +346,56 @@ export default function EventPage() {
                                                     : new Date(+Date.now()).toISOString().split('T')[0] == new Date(+date).toISOString().split('T')[0] ?
                                                         <td className="checkpoint_td relative h-40 text-center min-h-[100%] pt-6 pb-6">
                                                             
-                                                            <div className="chekpointsStats z-20 opacity-[0.5] absolute top-8 left-0">
-                                                                {Object.keys(checkpointsStatus).includes(`${date}|${team.id}`) ? 
-                                                                <div className="bg-[#7de64d65] pr-2 pl-2 border-2 text-xs rounded-3xl  border-[#7de64d65]">
-                                                                    { checkpointsStatus[`${date}|${team.id}`][1] }
-                                                                </div>
-                                                                 : ''
+                                                            <div className="chekpointsStats absolute top-8 left-4">
+                                                                {
+                                                                    Object.keys(checkpointsStatus).includes(`${date}|${team.id}`) ? 
+                                                                        <div className="bg-[#7de64d65] text-center pr-1 pl-1 h-5 w-5 cursor-pointer border-2 text-xs rounded-3xl border-[#7de64d65]">
+                                                                            { 
+                                                                                checkpointsStatus[`${date}|${team.id}`][1] == 0 ?
+                                                                                <>
+                                                                                    <TooltipProvider>
+                                                                                        <Tooltip delayDuration={0}>
+                                                                                            <TooltipTrigger >
+                                                                                                <Checks className="border-2 rounded-full backdrop-blur-2xl border-dotted border-[#7de64d65]" fontSize={20}/>
+                                                                                            </TooltipTrigger>
+                                                                                            <TooltipContent>
+                                                                                                تم التحقق من كل نقاط التقدم 
+                                                                                            </TooltipContent>
+                                                                                        </Tooltip>
+                                                                                    </TooltipProvider>
+                                                                                </>
+                                                                                : <>
+
+                                                                                    <TooltipProvider>
+                                                                                        <Tooltip delayDuration={0}>
+                                                                                            <TooltipTrigger>
+                                                                                                {checkpointsStatus[`${date}|${team.id}`][1]}
+                                                                                            </TooltipTrigger>
+                                                                                            <TooltipContent>
+                                                                                               {checkpointsStatus[`${date}|${team.id}`][1]}  نقطة تقدم غير متحقق منها
+                                                                                            </TooltipContent>
+                                                                                        </Tooltip>
+                                                                                    </TooltipProvider>
+                                                                                </>
+                                                                            }
+                                                                        </div>
+                                                                    : ``
                                                                  }
                                                             </div>
 
                                                                 <DropdownMenu modal={true}>
                                                                     <DropdownMenuTrigger asChild>
                                                                         <button>
-                                                                            <Signpost size={30} weight="bold" color="#7de64d65" />
+                                                                            <Signpost size={25} weight="bold" color="#7de64d65" />
                                                                         </button>
                                                                     </DropdownMenuTrigger>
                                                                     <DropdownMenuContent sideOffset={15} className="z-20  border-2 bg-primary border-[#7de64d65] p-2 rounded-xl">
                                                                         <DropdownMenuLabel className="text-xl">
-                                                                            نقاط تقدم الفعالية 
+                                                                            نقاط تقدم الفعالية
                                                                         </DropdownMenuLabel>
                                                                         <DropdownMenuSeparator className="bg-muted h-[1px] mt-2" />
-                                                                        <Button className="text-lg rounded-xl mt-3 mb-1 w-[100%] gap-3 bg-[#7de64d65] cursor-pointer h-[30px]">
-                                                                            <Plus /> اضِف
+                                                                        <Button  onClick={() => setCheckpointModal(true)} className="text-lg rounded-xl mt-3 mb-1 w-[100%] gap-3 bg-[#7de64d65] cursor-pointer h-[30px]">
+                                                                            <Plus/> اضِف
                                                                         </Button>
                                                                     </DropdownMenuContent>
                                                                 </DropdownMenu>
