@@ -368,7 +368,7 @@ export default function EventPage() {
 
                                                                                     <TooltipProvider>
                                                                                         <Tooltip delayDuration={0}>
-                                                                                            <TooltipTrigger>
+                                                                                        event                                                  <TooltipTrigger>
                                                                                                 {checkpointsStatus[`${date}|${team.id}`][1]}
                                                                                             </TooltipTrigger>
                                                                                             <TooltipContent>

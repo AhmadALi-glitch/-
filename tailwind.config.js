@@ -22,7 +22,7 @@ module.exports = {
         border: "green",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
+        background: "#222",
         foreground: "hsl(var(--foreground))",
         primary: {
           DEFAULT: "#000",
