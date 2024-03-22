@@ -52,7 +52,7 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
 
-    <div className="bg-background w-svw h-svh pl-10 pr-10 pt-6">
+    <div className="bg-background flex flex-col w-svw h-svh pl-10 pr-10 pt-6 font-main overflow-auto">
 
       <div className="w-full border-b-[3px] border-[#A8BE69] pb-[1px] border-opacity-[0.1] flex justify-between items-center text-[#C9DF8A]">
 
@@ -88,8 +88,10 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
       </div>
 
-      <RouterProvider router={router}/>
+      <div className="page basis-[100%]">
+        <RouterProvider router={router}/>
+      </div>
 
     </div>
-  </React.StrictMode>,
+  </React.StrictMode>
 )

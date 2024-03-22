@@ -1,8 +1,9 @@
 
 
-
-export default function Lotus1() {
+export default function Crown1() {
     return (
-        <>crown 1 Component</>
+        <>
+            <img width={650} className="bg-blend-multiply" src="/src/assets/banners/crown1.svg" />
+        </>
     )
 }

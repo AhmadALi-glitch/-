@@ -1,8 +1,9 @@
 
 
-
-export default function Lotus1() {
+export default function Potheus4() {
     return (
-        <>Lot 1 Component</>
+        <>
+            <img width={450} className="bg-blend-multiply" src="/src/assets/banners/potheus4.svg" />
+        </>
     )
 }

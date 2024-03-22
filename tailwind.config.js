@@ -10,6 +10,9 @@ module.exports = {
   ],
   prefix: "",
   theme: {
+    fontFamily: {
+      'main': 'typeface'
+    },
     container: {
       center: true,
       padding: "2rem",
@@ -22,7 +25,7 @@ module.exports = {
         border: "green",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
-        background: "#222",
+        background: "#111",
         foreground: "hsl(var(--foreground))",
         primary: {
           DEFAULT: "#000",
