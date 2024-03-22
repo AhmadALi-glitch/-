@@ -1,8 +1,8 @@
 
-
-
-export default function Lotus1() {
+export default function Emerald2() {
     return (
-        <>Lot 1 Component</>
+        <>
+            <img width={350} className="bg-blend-multiply" src="/src/assets/banners/emerald2.svg" />
+        </>
     )
 }

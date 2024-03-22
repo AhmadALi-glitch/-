@@ -1,7 +1,8 @@
 
-
 export default function Lotus3() {
     return (
-        <>Lot 3 Component</>
+        <>
+            <img width={450} className="bg-blend-multiply" src="/src/assets/banners/lotus3.svg" />
+        </>
     )
 }

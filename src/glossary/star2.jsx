@@ -1,8 +1,9 @@
 
 
-
-export default function Lotus1() {
+export default function Star2() { 
     return (
-        <>Lot 1 Component</>
+        <>
+            <img width={450} className="bg-blend-multiply" src="/src/assets/banners/star2.svg" />
+        </>
     )
 }

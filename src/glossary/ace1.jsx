@@ -1,9 +1,8 @@
 
-
-
-export default function Lotus1() {
+export default function Ace1() {
     return (
-        <>ace 1 Component</>
+        <>
+            <img width={450} className="bg-blend-multiply" src="/src/assets/banners/ace1.svg" />
+        </>
     )
 }
-

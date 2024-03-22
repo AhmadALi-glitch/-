@@ -7,7 +7,6 @@ import Lotus3 from "../glossary/lotus3"
 
 import Ace1 from "../glossary/ace1"
 import Ace2 from "../glossary/ace2"
-import Ace3 from "../glossary/ace3"
 
 import Potheus1 from "../glossary/potheus1"
 import Potheus2 from "../glossary/potheus2"
@@ -24,10 +23,11 @@ import Star4 from "../glossary/star4"
 
 import Emerald1 from "../glossary/emerald1"
 import Emerald2 from "../glossary/emerald2"
-import Emerald3 from "../glossary/emerald3"
 
 import Lottie from "react-lottie"
 import sparksAnimationData from "../assets/lottiefiles/sparks.json"
+
+import "../../app/animation.css"
 
 export default function LoadingPage() {
 
@@ -44,7 +44,6 @@ export default function LoadingPage() {
         'Lotus3': <Lotus3></Lotus3>,
         'Ace1': <Ace1></Ace1>,
         'Ace2': <Ace2></Ace2>,
-        'Ace3': <Ace3></Ace3>,
         'Potheus1': <Potheus1></Potheus1>,
         'Potheus2': <Potheus2></Potheus2>,
         'Potheus3': <Potheus3></Potheus3>,
@@ -57,7 +56,6 @@ export default function LoadingPage() {
         'Crown3': <Crown3></Crown3>,
         'Emerald1': <Emerald1></Emerald1>,
         'Emerald2': <Emerald2></Emerald2>,
-        'Emerald3': <Emerald3></Emerald3>
     }
 
     let chooseRandomTip = function() {
@@ -85,9 +83,9 @@ export default function LoadingPage() {
                         </div>
                     </div>
                     <div className="separator w-[2px] bg-[#C9DF8A] opacity-[0.06] h-[400px]"></div>
-                    <div style={{backgroundBlendMode: "lighten"}} className="basis-[50%] flex bg-blend-hard-light justify-center items-center">
+                <div style={{animation: "float ease 8s infinite alternate", backgroundBlendMode: "lighten"}} className="basis-[50%] flex bg-blend-hard-light justify-center items-center">
                         {
-                            components['Lotus1'] 
+                            components[componentName] 
                         }
                     </div>   
                 </div>
