@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "profilePic": "https://cdn.salla.sa/customer_profiles/piVqj4Pr9jSGGYN4cTj4O9AJwDAEfb1ger147cjn.jpg",
+    "userName": "Rania Aldossary",
+    "userGender": "female",
+    "date": "1/1/2024",
+    "postText": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam cumque voluptate, provident, incidunt architecto eveniet sed adipisci ipsa facere consectetur rerum. Magnam quisquam quam eaque sed! Numquam exercitationem placeat, quibusdam sit officiis voluptates ipsa? Labore, officiis?"
+  },
+  {
+    "id": 2,
+    "profilePic": "",
+    "userName": "Gamal Taha",
+    "userGender": "male",
+    "date": "3/22/2024",
+    "postText": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam cumque voluptate, provident, incidunt architecto eveniet sed adipisci ipsa facere consectetur rerum. Magnam quisquam quam eaque sed! Numquam exercitationem placeat, quibusdam sit officiis voluptates ipsa? Labore, officiis?"
+  },
+  {
+    "id": 3,
+    "profilePic": "https://cdn.salla.sa/customer_profiles/fCN69uADu0Vds7dpmHUoV0CkXw6bNR7T3Y6L9K7q.jpg",
+    "userName": "Ali Alsaddy",
+    "userGender": "male",
+    "date": "2/14/2024",
+    "postText": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam cumque voluptate, provident, incidunt architecto eveniet sed adipisci ipsa facere consectetur rerum. Magnam quisquam quam eaque sed! Numquam exercitationem placeat, quibusdam sit officiis voluptates ipsa? Labore, officiis?"
+  },
+  {
+    "id": 4,
+    "profilePic": "",
+    "userName": "Monira Mohammed",
+    "userGender": "female",
+    "date": "3/3/2024",
+    "postText": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam cumque voluptate, provident, incidunt architecto eveniet sed adipisci ipsa facere consectetur rerum. Magnam quisquam quam eaque sed! Numquam exercitationem placeat, quibusdam sit officiis voluptates ipsa? Labore, officiis?"
+  },
+  {
+    "id": 5,
+    "profilePic": "",
+    "userName": "Yasser M55",
+    "userGender": "male",
+    "date": "2/23/2024",
+    "postText": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam cumque voluptate, provident, incidunt architecto eveniet sed adipisci ipsa facere consectetur rerum. Magnam quisquam quam eaque sed! Numquam exercitationem placeat, quibusdam sit officiis voluptates ipsa? Labore, officiis?"
+  }
+]

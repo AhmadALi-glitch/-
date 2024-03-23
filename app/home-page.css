@@ -1,0 +1,121 @@
+/* Start Home Page */
+.home-page .page-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+} 
+
+.home-page .page-wrapper .posts {
+  width: calc(100% - 380px);
+  display: grid;
+  gap: 30px;
+  padding-left: 50px;
+}
+
+.home-page .page-wrapper .posts .post {
+  width: 100%;
+  max-width: 645px;
+}
+
+.home-page .page-wrapper .posts .post .user {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.home-page .page-wrapper .posts .post .user img {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+}
+
+.home-page .page-wrapper .posts .post .user h4 {
+  color: #C9DF8A;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.home-page .page-wrapper .posts .post .user span {
+  font-size: 14px;
+}
+
+.home-page .page-wrapper .posts .post .text {
+  line-height: 1.6;
+  font-size: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #777;
+  margin: 20px 0 10px;
+}
+
+.home-page .page-wrapper .posts .post .comment-btn {
+  padding: 7px 26px;
+  border: 1px solid #777;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 800;
+  transition: all 0.4s;
+}
+
+.home-page .page-wrapper .posts .post .comment-btn:hover {
+  background-color: #C9DF8A;
+  color: #111;
+}
+
+.home-page aside {
+  background-color: #2a2b27;
+  width: 380px;
+  padding: 30px;
+  border-radius: 10px;
+}
+
+.home-page aside h3 {
+  color: #C9DF8A;
+  font-size: 27px;
+  margin-bottom: 20px;
+}
+
+.home-page aside .block {
+  display: grid;
+  gap: 10px;
+}
+
+.home-page aside .block:not(:last-of-type) {
+  margin-bottom: 30px;
+}
+
+.home-page aside .block a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 15px;
+  border-bottom: 1px solid rgb(201, 223, 138, 0.1);
+  transition: color 0.4s;
+}
+
+.home-page aside .block a:hover {
+  color: #C9DF8A;
+}
+
+.home-page aside .block a span {
+  font-size: 20px;
+}
+
+/* Small Screens & Down */
+@media (max-width: 991px) {
+  .home-page .page-wrapper {
+    flex-wrap: wrap-reverse;
+  }
+  .home-page .page-wrapper .posts,
+  .home-page aside {
+    width: 100%;
+  }
+  .home-page .page-wrapper .posts {
+    padding-left: 0;
+    padding-top: 50px;
+  }
+  .home-page .page-wrapper .posts .post {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+/* End Home Page */
