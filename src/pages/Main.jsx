@@ -1,5 +1,6 @@
 
 export default function MainPage() {
+  
   /**@type{string}*/
   const hw = "Main Page"
   return (

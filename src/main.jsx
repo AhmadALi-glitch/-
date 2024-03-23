@@ -49,6 +49,9 @@ const router = createBrowserRouter([
   },
 ]);
 
+
+
+console.log(Intl.DateTimeFormat().resolvedOptions().timeZone)
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <RouterProvider router={router}/>
