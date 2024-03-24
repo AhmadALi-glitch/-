@@ -1,4 +1,11 @@
 /* Start Global Rules */
+
+
+@font-face {
+  font-family: typeface;
+  src: url();
+}
+
 * {
   margin: 0;
   padding: 0;

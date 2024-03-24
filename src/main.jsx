@@ -11,7 +11,7 @@ import SignupPage from './pages/Signup'
 import GuidePage from './pages/Guide'
 import EventPage from './pages/Event'
 import "../app/profile.css"
-import "../app/team-profile.css"
+import "../app/components.css"
 
 const router = createBrowserRouter([
   {
