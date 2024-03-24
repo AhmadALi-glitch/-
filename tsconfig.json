@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "es2020",
     "allowJs": true,
-    "checkJs": true,
+    "checkJs": false,
     "strict": false,
     "moduleResolution": "bundler",
     "resolveJsonModule": true,

@@ -277,7 +277,7 @@ export default function EventPage() {
             <div className="h-lvh overflow-auto flex items-center justify-center">
                 <div className="max-w-[100%] max-h-[70%] overflow-auto ">
                     <table className="p-7 w-full" >
-                        <thead className="sticky -top-1 backdrop-blur-sm z-20">
+                        <thead className="sticky -top-1 backdrop-blur-sm z-10">
                             <th ref={ref} className="min-w-40 pl-2 pr-2 pt-8 pb-8 text-center"></th>
                             {
                                 Object.keys(datesTeamsMap).map((date) => {
