@@ -19,6 +19,10 @@
     "@radix-ui/react-toggle-group": "^1.0.4",
     "@radix-ui/react-tooltip": "^1.0.7",
     "@reduxjs/toolkit": "^2.2.2",
+<<<<<<< HEAD
+=======
+    "@types/react-lottie": "^1.2.10",
+>>>>>>> loadingPage
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "cors": "^2.8.5",

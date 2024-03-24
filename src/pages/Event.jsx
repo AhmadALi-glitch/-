@@ -1,8 +1,8 @@
 import { useState } from "react"
 import { useSearchParams } from "react-router-dom"
-import { Circle, Flag, Plus, Signpost } from "phosphor-react"
-import { Checks, Play } from "phosphor-react"
-import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuSeparator, DropdownMenuLabel } from "@radix-ui/react-dropdown-menu"
+import { Plus, Signpost, Flag, Circle } from "phosphor-react"
+import { Checks } from "phosphor-react"
+import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuSeparator, DropdownMenuItem, DropdownMenuLabel } from "@radix-ui/react-dropdown-menu"
 import { Button } from "@/components/ui/button"
 import { useInView } from "react-intersection-observer"
 import { Tooltip, TooltipProvider, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
@@ -274,8 +274,8 @@ export default function EventPage() {
                     <></>
             }
 
-            <div className="h-lvh overflow-auto bg-black flex items-center justify-center">
-                <div className="max-w-[70%] max-h-[90%] overflow-auto bg-black ">
+            <div className="h-lvh overflow-auto flex items-center justify-center">
+                <div className="max-w-[100%] max-h-[70%] overflow-auto ">
                     <table className="p-7 w-full" >
                         <thead className="sticky -top-1 backdrop-blur-sm z-20">
                             <th ref={ref} className="min-w-40 pl-2 pr-2 pt-8 pb-8 text-center"></th>
