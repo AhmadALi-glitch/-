@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useSearchParams } from "react-router-dom"
 import { Plus, Signpost, Flag, Circle } from "phosphor-react"
 import { Checks } from "phosphor-react"
@@ -7,12 +7,24 @@ import { Button } from "@/components/ui/button"
 import { useInView } from "react-intersection-observer"
 import { Tooltip, TooltipProvider, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 import { convertUtcToLocale } from "@/utils/date"
+import { httpClient } from "@/http"
 
 
 export default function EventPage() {
 
-    // let [eventDataStatus, setEventDataStatus] = useState('loading')
+
+    let [eventInfo, setEventInfo] = useState({})
+
     let [params, _] = useSearchParams()
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        httpClient.get(`/event/${params.get('event_id')}`).then((result) => {
+            setEventInfo(result.data.events)
+            setLoading(false)
+            console.log("res" ,result)
+        })
+    }, [])
 
     let checkpointsStatus = {};
     let datesTeamsMap = {}
@@ -266,8 +278,64 @@ export default function EventPage() {
                     <></>
             }
 
-            <div className="h-lvh overflow-auto flex items-center justify-center">
-                <div className="max-w-[100%] max-h-[70%] overflow-auto ">
+            {!loading ? 
+            <div className="max-h-[800px] overflow-auto flex flex-col justify-between gap-3 items-center">
+
+                <div className="event-info flex justify-between gap-2 w-full pt-8 pb-4 basis-[30%]">
+
+                    <div className="information flex basis-[70%] flex-col gap-2">
+                        <div className="heading w-full flex items-center gap-4">
+                            <div className="name text-3xl text-primary font-extrabold">
+                                {eventInfo.name}
+                            </div>
+                            <div className="separator rounded-full h-[40%] opacity-[0.1] w-[5px] bg-primary"></div>
+                            <div className="actions">
+                                <button className="join text-primary">انضم</button>
+                            </div>
+                        </div>
+                        <div className="tags flex items-center text-sm gap-2">
+                            <div className="tag border-2 rounded-lg p-1">
+                                منظم : احمد
+                            </div>
+                            <div className="separator rounded-full h-[40%] opacity-[0.1] w-[5px] bg-primary"></div>
+                            <div className="tag border-2 rounded-lg p-1">
+                                المشاركين : احمد وعلي ومصطفى
+                            </div>
+                        </div>
+                        <div className="description">
+                            {
+                                eventInfo.description
+                            }
+                        </div>
+                    </div> 
+
+                    <div className="details flex flex-col pt-2 pb-1 justify-start gap-2 rounded-2xl basis-[20%] border-opacity-10">
+                        <div className="detail flex justify-between">تاريخ البدء
+                            <span className="text-primary font-extrabold">
+                                {convertUtcToLocale(+eventInfo.start_date_utc).date}
+                            </span>
+                        </div>
+                        <div className="detail flex justify-between">تنتهي في 
+                            <span className="text-primary font-extrabold">
+                                {convertUtcToLocale(+eventInfo.end_date_utc).date}
+                            </span>
+                        </div>
+                        <div className="detail flex justify-between">المحتوى 
+                            <span className="text-primary font-extrabold">
+                                {eventInfo.field}
+                            </span>
+                        </div>
+                        <div className="detail flex justify-between">النوع 
+                            <span className="text-primary font-extrabold">
+                                {eventInfo.style}
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+                <div className="separator rounded-full h-[12px] opacity-[0.1] w-[100%] bg-primary"></div>
+                <div className="max-w-[100%] basis-[70%] flex overflow-auto ">
+
                     <table className="p-7 w-full" >
                         <thead className="sticky -top-1 backdrop-blur-sm z-10">
                             <th ref={ref} className="min-w-40 pl-2 pr-2 pt-8 pb-8 text-center"></th>
@@ -445,8 +513,9 @@ export default function EventPage() {
 
                         </tbody>
                     </table>
+
                 </div>
-            </div>
+            </div> : <></>}
 
         </>
     )
