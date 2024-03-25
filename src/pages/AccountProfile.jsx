@@ -2,6 +2,7 @@ import { httpClient } from '@/http';
 import '../../app/profile.css';
 import { DiamondsFour } from 'phosphor-react';
 import { useEffect, useState } from 'react';
+import { convertUtcToLocale, getMyTimeZone } from '@/utils/date';
 
 export default function AccountProfilePage() {
 
@@ -10,7 +11,7 @@ export default function AccountProfilePage() {
 
   useEffect(() => {
 
-    httpClient.get('/account/get-my-info').then((result) => {
+    httpClient.get(`/account/get-my-info/${getMyTimeZone().replace('/','-')}`).then((result) => {
       console.log(result)
       setAccountData(result.data)
       setLoading(false)
@@ -27,10 +28,10 @@ export default function AccountProfilePage() {
               <div className="info">
                 <img src="https://avatars.githubusercontent.com/u/152053291?v=4" alt="Profile Image" className="profile-img" />
                 <ul className="info-list">
-                  <li>{accountData.join_date_utc}</li>
+                  <li>انضم في : {convertUtcToLocale(accountData.join_date_utc).date}</li>
                   {/* <li>{accountData}</li> */}
                   <li>الفريق : {accountData.team ? accountData.team.name : "لا يوجد"}</li>
-                  <li>قام بتنظيم : {accountData.organizing.length}</li>
+                  <li>قام بتنظيم : {accountData.organizing.length} فعاليات</li>
                   {/* <li>عدد التقييمات الايجابية :  30</li> */}
                 </ul>
               </div>
@@ -46,40 +47,82 @@ export default function AccountProfilePage() {
                   <li>فريق : {accountData.team  ? accountData.team.name : "لا يوجد"}</li>
                 </ul>
                 <p>
-                  مرحبا انا عبد الرحمن خالد من مصر اعمل كمهندس برمجيات هدفي هنا ان اقوم بانشاء الفعاليات وتنظيمها والتنسيق بين الفرق ايضاً لدي شغف بكتابة القصص لذا اقضي معظم وقتي في ماراثونات الكتابة
+                  {accountData.about}
                 </p>
                 <div className="events">
                   <h3>الفعاليات الحالية</h3>
                   <div className="boxes-wrapper">
-                    <div className="box">
+                    <div className="box overlfow-hidden">
                       <h4>ينظم الآن</h4>
-                      <span><DiamondsFour /> لا شيء</span>
+                      <div className="flex flex-col gap-4 overflow-scroll max-h-[170px]">
+                        {
+                          accountData.organizingNow.length ? accountData.organizingNow.map((o, i) => {
+                            return <>
+                              <div key={i} className='flex items-center gap-2'>
+                                <DiamondsFour className='text-primary'/>
+                                <div>{ o.event.start_date_utc?.length > 0 ? convertUtcToLocale(+o.event.end_date_utc).date : '' }</div>
+                                {/* <div>{ o.event.start_date_utc }</div> */}
+                              </div> 
+                            </>
+                          }): <div className='flex items-center gap-2'>
+                            <DiamondsFour className='text-primary'/>
+                            <div>لا شيء</div>
+                          </div> 
+                        }
+                      </div>
                     </div>
+
+                    <div className="box">
+                      <h4>فعاليات مجدولة</h4>
+                      <div className="flex flex-col gap-4 overflow-scroll max-h-[170px]">
+                        {
+                          accountData.scheduling.length ? accountData.scheduling.map((o, i) => {
+                            return <div key={i} >
+                              <div className='flex items-center gap-2'>
+                                <DiamondsFour className='text-primary'/>
+                                {/* <div>{ o.event.start_date_utc?.length > 0 ? convertUtcToLocale(+o.event.end_date_utc).date : '' }</div> */}
+                                <div>{ o.event.name }</div>
+                              </div> 
+                            </div>
+                          }): <div className='flex items-center gap-2'>
+                            <DiamondsFour className='text-primary'/>
+                            <div>لا شيء</div>
+                          </div> 
+                        }
+                      </div>
+                    </div>
+
                     <div className="box">
                       <h4>مشترك الآن في</h4>
-                      <span><DiamondsFour /> ماراثون كتابة شعر نثري</span>
+                        {
+                          accountData.enrolledIn.length ? accountData.enrolledIn.map((event, i) => {
+                            return <div key={i} >
+                              <div className='flex items-center gap-2'>
+                                <DiamondsFour className='text-primary'/>
+                                <div>{ event.name }</div>
+                              </div> 
+                            </div>
+                          }): <div className='flex items-center gap-2'>
+                            <DiamondsFour className='text-primary'/>
+                            <div>لا شيء</div>
+                          </div> 
+                        }
                     </div>
                   </div>
                 </div>
                 <div className="achievements">
                   <h3>الانجازات</h3>
                   <div className="boxes-wrapper">
-                    <div className="box">
-                      <img src="src/assets/achievment-badge.svg" alt="Badge Icon" />
-                      موقع تعليم التصميم
-                    </div>
-                    <div className="box">
-                      <img src="src/assets/achievment-badge.svg" alt="Badge Icon" />
-                      موقع تعليم التصميم
-                    </div>
-                    <div className="box">
-                      <img src="src/assets/achievment-badge.svg" alt="Badge Icon" />
-                      موقع تعليم التصميم
-                    </div>
-                    <div className="box">
-                      <img src="src/assets/achievment-badge.svg" alt="Badge Icon" />
-                      موقع تعليم التصميم
-                    </div>
+                    {
+                      accountData.achievments.length ? accountData.achievments.map((ach) => {
+                        return <div className="box">
+                            <img src="src/assets/achievment-badge.svg" alt="Badge Icon" />
+                            <div className="ach-name">{ ach.name }</div>
+                        </div>
+                      }) : <div className="box">
+                            <div className="ach-name">لا يوجد انجازات حتى الآن</div>
+                      </div>
+                    }
                   </div>
                 </div>
               </div>

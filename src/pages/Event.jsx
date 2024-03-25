@@ -6,15 +6,7 @@ import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuSep
 import { Button } from "@/components/ui/button"
 import { useInView } from "react-intersection-observer"
 import { Tooltip, TooltipProvider, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
-
-
-function convertUtcToLocale(utcDateInMs) {
-    return {
-        date: new Date(+utcDateInMs - new Date().getTimezoneOffset()).toISOString().split('T')[0],
-        time: new Date(+utcDateInMs - new Date().getTimezoneOffset()).toISOString().split(/[T.]/g)[1],
-        ms: new Date(+utcDateInMs - new Date().getTimezoneOffset()).valueOf()
-    }
-}
+import { convertUtcToLocale } from "@/utils/date"
 
 
 export default function EventPage() {

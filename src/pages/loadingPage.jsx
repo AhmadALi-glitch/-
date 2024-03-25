@@ -26,13 +26,56 @@ import Emerald2 from "../glossary/emerald2"
 
 import Lottie from "react-lottie"
 import sparksAnimationData from "../assets/lottiefiles/sparks.json"
-
+import { animated, easings, useSpring, useTransition } from "@react-spring/web"
 import "../../app/animation.css"
+import { useEffect } from "react"
+import loadingAnimationData from "../assets/lottiefiles/loading.json"
 
 export default function LoadingPage() {
 
+    let [slice1Springs, slice1SpringsApi] = useSpring(() => {
+        return {
+            from: {
+                transform: 'translateY(-100px)',
+                opacity: 0
+            },
+            to: {
+                transform: 'translateY(0)',
+                opacity: 1
+            },
+            config: {
+                duration: 1000,
+                easing: easings.easeOutQuad
+            }
+        }
+    })
+    
+    let [slice2Springs, slice2SpringsApi] = useSpring(() => {
+        return {
+            from: {
+                transform: 'translateY(-250px)',
+                opacity: 0
+            },
+            to: {
+                transform: 'translateY(0)',
+                opacity: 1
+            },
+            config: {
+                duration: 1000,
+                easing: easings.easeOutQuad
+            }
+        }
+    })
+
     let sparksAnimationOptions = {
         animationData: sparksAnimationData,
+        autoplay: true,
+        loop: true,
+        isPausedWhenClick: false
+    }
+
+    let loadingAnimationOptions = {
+        animationData: loadingAnimationData,
         autoplay: true,
         loop: true,
         isPausedWhenClick: false
@@ -73,24 +116,24 @@ export default function LoadingPage() {
             <div className="flex flex-col w-full h-full font-main">
                 <div className="wrapper basis-[100%] flex items-center justify-center gap-2 ">
                     <div className="tip text-center line-clamp-6 relative h-full basis-[50%] flex justify-center items-center">
-                        <div className="content text-xl w-[50%] font-extrabold text-[#C9DF8A]" style={{lineHeight: 1.6}}>
+                        <animated.div className="content text-xl w-[50%] font-extrabold text-[#C9DF8A]" style={{...slice1Springs, lineHeight: 1.6}}>
                             {
                                 data
                             }
-                        </div>
+                        </animated.div>
                         <div className="floating-sparks absolute right-0 opacity-5 text-white">
                             <Lottie isClickToPauseDisabled={true} style={{cursor: "auto"}} width={400} options={sparksAnimationOptions} />
                         </div>
                     </div>
                     <div className="separator w-[2px] bg-[#C9DF8A] opacity-[0.06] h-[400px]"></div>
-                <div style={{animation: "float ease 8s infinite alternate", backgroundBlendMode: "lighten"}} className="basis-[50%] flex bg-blend-hard-light justify-center items-center">
+                    <animated.div style={{...slice2Springs}} className="basis-[50%] flex bg-blend-hard-light justify-center items-center">
                         {
                             components[componentName] 
                         }
-                    </div>   
+                    </animated.div>   
                 </div>
-                <div className="basis-[10%] pl-3 self-end text-[#C9DF8A]">
-                    يتم تحميل الصفحة
+                <div className="basis-[10%] pl-10 font-extrabold self-end text-[#C9DF8A]">
+                    <Lottie isClickToPauseDisabled={true} style={{cursor: "auto"}} width={80} options={loadingAnimationOptions} />
                 </div>
             </div>
         </>

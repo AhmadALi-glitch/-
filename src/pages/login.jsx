@@ -16,9 +16,11 @@ export default function Login() {
           headers: {
             "Content-Type": "multipart/form-data"
           }
-        }).then(console.log)
+        }).then((result) => {
+            localStorage.setItem("user", result)
+        })
       
-      }      
+    }
 
     return (
         <>
