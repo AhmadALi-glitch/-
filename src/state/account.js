@@ -1,17 +1,5 @@
+import { createContext } from "react";
 
 
-import { createSlice } from "@reduxjs/toolkit";
-
-
-const accountInitialState = {
-    name: '',
-    isLoggedIn: false
-}
-
-
-export const couterSlice = createSlice({
-    name: 'account',
-    initialState: accountInitialState,
-    reducers: {
-    }
-})
+export const accountContext = createContext(localStorage.getItem('emerald-user'))
+export const accountReducerContext = createContext(null)

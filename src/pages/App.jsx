@@ -1,7 +1,8 @@
 
-import { createContext, useEffect, useReducer, useState } from "react";
+import { createContext, useState } from "react";
 import LoadingPage from "./loadingPage";
 import { animated, easings, useSpring } from "@react-spring/web";
+import { accountContext, accountReducerContext } from "@/state/account";
 
 export const loadingContext = createContext({
     loading: false
@@ -14,6 +15,8 @@ export const loadingReducerContext = createContext({
 export default function App({children}) {
 
   let [loading, setLoading] = useState(false)
+  let [account, setAccount] = useState(localStorage.getItem('emerald-user'))
+
 
   let [pageSprings, pageSpringsApi] = useSpring(() => {
     return {
@@ -99,16 +102,22 @@ export default function App({children}) {
 
   return (
     <>
-      <loadingContext.Provider value={loading}>
-        <loadingReducerContext.Provider value={runLoadingAnimation}>
-          { loading ? <animated.div style={{...loadingSprings}} className="w-svw h-svh">
-            <LoadingPage />
-          </animated.div> :
-          <animated.div style={{...pageSprings}} className="children">
-            { children }
-          </animated.div> }
-        </loadingReducerContext.Provider>
-      </loadingContext.Provider>
+      <accountContext.Provider value={account}>
+        <accountReducerContext.Provider value={setAccount}>
+          <loadingContext.Provider value={loading}>
+            <loadingReducerContext.Provider value={runLoadingAnimation}>
+              { loading ? 
+                <animated.div style={{...loadingSprings}} className="w-svw h-svh">
+                  <LoadingPage />
+                </animated.div> :
+                <animated.div style={{...pageSprings}} className="children">
+                  { children }
+                </animated.div>
+              }
+            </loadingReducerContext.Provider>
+          </loadingContext.Provider>
+        </accountReducerContext.Provider>
+      </accountContext.Provider>
     </>
   )
 
