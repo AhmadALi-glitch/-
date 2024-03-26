@@ -195,7 +195,7 @@ export default function EventPage() {
                             <div className="absolute w-full h-full z-50 bg-transparent backdrop-blur-sm text-[#d0f0428e] text-2xl flex items-center justify-center">
                                 <div className="checkpoint-details relative overflow-hidden w-[500px] h-[500px] bg-[#eee] rounded-2xl p-8 border-2 border-primary">
                                     <Signpost className="absolute left-0 -bottom-[50px] opacity-[0.5]" weight="duotone" size={200}></Signpost>
-                                    
+
                                     <div className="header flex justify-between">
                                         <div className="checkpoint-title flex items-center gap-2 font-bold text-black">
                                             <Signpost weight="duotone" size={40}></Signpost>
@@ -208,8 +208,8 @@ export default function EventPage() {
                                         </button>
                                     </div>
 
-                                    <div className="checkpoint-body">
-                                        <div className="checkpoint-date">{ convertUtcToLocale(+checkpointModalDetails.create_date_utc).date }</div>
+                                    <div className="checkpoint-body pt-10 text-xl text-black">
+                                        <div className="checkpoint-date">تاريخ التسجيل : { convertUtcToLocale(+checkpointModalDetails.create_date_utc).date }</div>
                                         <div className="checkpoint-executors"></div>
                                         <div className="checkpoint-description"></div>
                                         <div className="checkpoint-evaluating"></div>
