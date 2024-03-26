@@ -23,8 +23,8 @@ export default function Demo() {
             "Content-Type": "multipart/form-data"
             }
         }).then( (result) => {
-            localStorage.setItem("emerald-user", JSON.stringify(result.data))
             useLoadingContextReducer(false)
+            localStorage.setItem("emerald-user", JSON.stringify(result.data))
         })
     }
 
