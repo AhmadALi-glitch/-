@@ -12,6 +12,7 @@ import WelcomePage from './pages/Welcome'
 import SignupPage from './pages/Signup'
 import GuidePage from './pages/Guide'
 import CreateEventPage from './pages/CreateEventPage'
+import Achievements from './pages/Achievements'
 import '../app/components.css'
 
 const router = createBrowserRouter([
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
   {
     path : "/createEvents",
     element : <CreateEventPage />
+  },
+  {
+    path : "/achievements",
+    element : <Achievements />
   },
 ]);
 

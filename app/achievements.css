@@ -122,6 +122,9 @@
     width: 348px;
     height: 526px;
     border-radius: 10px;
+    position: sticky;
+    top: 50px;
+    z-index: 5;
 }
 
 .achievements-page aside>p {
