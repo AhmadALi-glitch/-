@@ -61,8 +61,8 @@ export default function AccountProfilePage() {
                             return <>
                               <div key={i} className='flex items-center gap-2'>
                                 <DiamondsFour className='text-primary'/>
-                                <div>{ o.event.start_date_utc?.length > 0 ? convertUtcToLocale(+o.event.end_date_utc).date : '' }</div>
-                                {/* <div>{ o.event.start_date_utc }</div> */}
+                                {/* <div>{ o.event.start_date_utc?.length > 0 ? convertUtcToLocale(+o.event.end_date_utc).date : '' }</div> */}
+                                <div>{ o.event.name }</div>
                               </div> 
                             </>
                           }): <div className='flex items-center gap-2'>
