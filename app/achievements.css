@@ -1,0 +1,182 @@
+/* Start Achievements Page */
+.achievements-page .page-wrapper {
+    display: flex;
+    align-items: flex-start;
+}
+
+.achievements-page .content {
+    width: calc(100% - 348px);
+    padding-left: 80px;
+}
+
+.achievements-page .content h2 {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.achievements-page .content .achievements-wrapper {
+    margin-top: 40px;
+    display: grid;
+    gap: 20px;
+}
+
+.achievements-page .content .box {
+    background-color: #4b4d47;
+    padding: 20px;
+    border: 1px solid rgb(201, 223, 138, 0.3);
+    border-radius: 10px;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.achievements-page .content .box::after {
+    content: "";
+    background: url("../src/assets/achievment-badge.svg") no-repeat center;
+    background-size: cover;
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    opacity: 0.4;
+    transform: translate(-40%, -40%);
+}
+
+.achievements-page .content .box h3 {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.achievements-page .content .box .body {
+    width: 85%;
+    padding-top: 5px;
+    border-top: 1px solid rgb(201, 223, 138, 0.3);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px 40px;
+}
+
+.achievements-page .content .box .body :where(.teams, .organizer) {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.achievements-page .content .box .body :where(.teams, .organizer) span {
+    width: 70px;
+}
+
+.achievements-page .content .box .body .teams .imgs {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.achievements-page .content .box .body .teams .imgs img {
+    display: block;
+    width: 28px;
+    height: 29px;
+    object-fit: cover;
+    border: 1px solid rgb(201, 223, 138, 0.6);
+    border-radius: 6px;
+}
+
+.achievements-page .content .box .body .organizer img {
+    display: block;
+    width: 30px;
+    height: 30px;
+    padding: 1px;
+    border-radius: 50%;
+    border: 1px solid rgb(201, 223, 138, 0.6);
+    object-fit: cover;
+}
+
+.achievements-page .content .box .body .btn {
+    background-color: #c9df8a;
+    display: flex;
+    padding: 4px 10px;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    align-items: center;
+    gap: 10px;
+    color: #111;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.achievements-page .content .box .body .btn svg {
+    font-size: 18px;
+}
+
+.achievements-page .content .box .body .btn+span {
+    font-size: 14px;
+}
+
+.achievements-page aside {
+    background-color: #2a2b27;
+    width: 348px;
+    height: 526px;
+    border-radius: 10px;
+}
+
+.achievements-page aside>p {
+    padding: 30px 30px 20px;
+    border-bottom: 4px solid #222;
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    font-size: 15px;
+}
+
+.achievements-page aside>p svg {
+    color: #c9df8a;
+    font-size: 18px;
+}
+
+.achievements-page aside .inputs {
+    padding: 36px 20px;
+    display: grid;
+    gap: 20px;
+}
+
+.achievements-page aside .inputs input {
+    background-color: transparent;
+    padding: 0;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #222;
+    border-radius: 0;
+    transition: border-color 0.4s;
+}
+
+.achievements-page aside .inputs input:focus {
+    border-color: #fff;
+}
+
+.achievements-page aside .inputs input::placeholder {
+    color: #fff;
+    font-size: 14px;
+}
+
+/* Small Screens & Down */
+@media (max-width: 991px) {
+    .achievements-page .page-wrapper {
+        flex-wrap: wrap-reverse;
+    }
+
+    .achievements-page .content,
+    .achievements-page aside {
+        width: 100%;
+    }
+
+    .achievements-page .content {
+        padding-left: 0;
+        padding-top: 50px;
+    }
+}
+
+/* End Achievements Page */
