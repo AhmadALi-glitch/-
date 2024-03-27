@@ -1,0 +1,9 @@
+/* Start Header */
+.pages .flex span {
+  display: none;
+}
+
+.pages .active span {
+  display: block;
+}
+/* End Header */

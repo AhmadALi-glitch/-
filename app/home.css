@@ -1,0 +1,92 @@
+/* Start Home */
+.responsive-table {
+  margin: 50px 0;
+  padding-bottom: 10px;
+  overflow-x: auto;
+}
+
+.responsive-table::-webkit-scrollbar {
+  background-color: transparent;
+}
+
+.responsive-table::-webkit-scrollbar-track {
+  height: 8px;
+}
+
+.responsive-table::-webkit-scrollbar-thumb {
+  background-color: #C9DF8A;
+  border-radius: 50px;
+}
+
+.responsive-table table {
+  min-width: 1000px;
+  max-width: 2000px;
+  position: relative;
+}
+
+.responsive-table table::before {
+  content: "";
+  background-color: #C9DF8A;
+  width: 1px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 160px;
+  transform: translateX(50%);
+}
+
+.responsive-table table thead tr {
+  border-bottom: 1px solid #C9DF8A;
+}
+
+.responsive-table table thead td:first-of-type {
+  width: 160px;
+}
+
+.responsive-table table thead td:last-child {
+  color: #C9DF8A;
+  font-size: 30px;
+  font-weight: bold;
+  padding-right: 150px;
+}
+
+.responsive-table table thead td {
+  padding: 20px;
+}
+
+.responsive-table table .main-cell {
+  width: 160px;
+  height: 160px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #C9DF8A;
+  font-weight: bold;
+}
+
+.responsive-table table .box {
+  width: 305px;
+  padding: 15px;
+  border: 2px solid rgb(201, 223, 138, 0.6);
+  border-radius: 10px;
+  margin: 10px;
+}
+
+.responsive-table table .box h3 {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.responsive-table table .box p {
+  line-height: 1.6;
+  font-size: 15px;
+  margin: 5px 0 40px;
+}
+
+.responsive-table table .box a {
+  display: block;
+  width: fit-content;
+  margin-right: auto;
+  font-size: 22px;
+}
+/* End Home */
