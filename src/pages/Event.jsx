@@ -196,23 +196,52 @@ export default function EventPage() {
                                 <div className="checkpoint-details relative overflow-hidden w-[500px] h-[500px] bg-[#eee] rounded-2xl p-8 border-2 border-primary">
                                     <Signpost className="absolute left-0 -bottom-[50px] opacity-[0.5]" weight="duotone" size={200}></Signpost>
 
-                                    <div className="header flex justify-between">
-                                        <div className="checkpoint-title flex items-center gap-2 font-bold text-black">
-                                            <Signpost weight="duotone" size={40}></Signpost>
-                                            <div>
-                                                {checkpointModalDetails.title}
+
+                                    <div className="fore absolute left-0 top-0 p-8">
+                                        <div className="header flex justify-between">
+                                            <div className="checkpoint-title flex items-center gap-2 font-bold text-black">
+                                                <Signpost weight="duotone" size={40}></Signpost>
+                                                <div>
+                                                    {checkpointModalDetails.title}
+                                                </div>
+                                            </div>
+                                            <button onClick={() => setDayCheckpointsList(false)}>
+                                                <X color={'#333'} fontWeight={"duotone"} />
+                                            </button>
+                                        </div>
+
+                                        <div className="checkpoint-body pt-10 flex flex-col gap-6 text-xl text-black">
+                                            <div className="checkpoint-date">تاريخ التسجيل : { convertUtcToLocale(+checkpointModalDetails.create_date_utc).date }</div>
+                                            <div className="checkpoint-executors">المنفذين : { 
+                                                checkpointModalDetails.executors.map((ex, i, arr) => {
+                                                    return <span className="ex">{ex.executor.name}
+                                                    {arr.length-1 == i ? '' : ' و '}
+                                                    </span>
+                                                })
+                                            }</div>
+                                            <div className="checkpoint-description overflow-auto max-h-40"> 
+                                                شرح : <span style={{lineHeight: 2.1}} className="bg-[#3331] pr-4 p-2 pl-4 rounded-md border-r-4">
+                                                    {checkpointModalDetails.description}
+                                                    {checkpointModalDetails.description}
+                                                    {checkpointModalDetails.description}
+                                                    {checkpointModalDetails.description}
+                                                    {checkpointModalDetails.description}
+                                                    {checkpointModalDetails.description}
+                                                    {checkpointModalDetails.description}
+                                                </span>
+                                            </div>
+                                            <div className="checkpoint-evaluating flex justify-start items-center gap-4">
+                                                { checkpointModalDetails.checked ? <Checks color="green" size={30} weight="duotone"></Checks> : <CircleDotDashed  color="orange" size={20}/> }
+                                                { checkpointModalDetails.checked ? 'تم التحقق' : 'لم يتم التحقق منها بعد'}
+                                                { checkpointModalDetails.checked ? <></> : 
+                                                
+                                                    <button className="check bg-primary w-fit p-1 text-black text-[15px] rounded-md self-end">
+                                                        سجّل التحقق
+                                                    </button>
+                                                
+                                                }
                                             </div>
                                         </div>
-                                        <button onClick={() => setDayCheckpointsList(false)}>
-                                            <X color={'#333'} fontWeight={"duotone"} />
-                                        </button>
-                                    </div>
-
-                                    <div className="checkpoint-body pt-10 text-xl text-black">
-                                        <div className="checkpoint-date">تاريخ التسجيل : { convertUtcToLocale(+checkpointModalDetails.create_date_utc).date }</div>
-                                        <div className="checkpoint-executors"></div>
-                                        <div className="checkpoint-description"></div>
-                                        <div className="checkpoint-evaluating"></div>
                                     </div>
                                 </div>
                             </div> : <></>
