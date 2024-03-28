@@ -15,7 +15,8 @@ httpClient.interceptors.response.use(
     },
     function(error) {
         console.log("Intercepter Response Error", error, "With Status: ", error.request.status)
-        if(error.request.status == 403) {
+        console.log(document.location.pathname)
+        if(error.request.status == 403 && document.location.pathname !== '/login') {
             document.location.replace('/login')
         }
         return error;

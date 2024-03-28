@@ -5,27 +5,26 @@ import { Button } from './components/ui/button'
 import { httpClient } from './http'
 import { useContext  } from 'react'
 import { loadingContext, loadingReducerContext } from "./pages/App"
+import { accountContext, accountReducerContext } from './state/account'
+import { login } from './service/account'
 
 export default function Demo() {
 
     let loadingContextState = useContext(loadingContext)
     let useLoadingContextReducer = useContext(loadingReducerContext)
+    let accountStateReducer = useContext(accountReducerContext)
 
-    const login = (email, password) => {
-
+    const callLogin = (email, password) => {
         useLoadingContextReducer(true)
-
-        return httpClient.post("http://localhost:3000/api/v1/account/login", {
-            email: email,
-            password: password
-        }, {
-            headers: {
-            "Content-Type": "multipart/form-data"
-            }
-        }).then( (result) => {
+        login(email, password).then( (result) => {
+            console.log(result)
             useLoadingContextReducer(false)
-            localStorage.setItem("emerald-user", JSON.stringify(result.data))
+            accountStateReducer(result.data)
         })
+    }
+
+    const navigateToEvent = (eventId) => {
+        window.location.replace(`event?event_id=${eventId}`)
     }
 
     return (
@@ -45,7 +44,7 @@ export default function Demo() {
 
                     <DropdownMenuSubTrigger className='flex items-center gap-2'>
                         <UsersThree size={30}></UsersThree>
-                        <Button className="w-full" onClick={() => login(1)}>
+                        <Button className="w-full" onClick={() => navigateToEvent(1)}>
                         <div className="text font-main text-xl">
                             Event : Hackathon Of Ramadan 
                         </div>
@@ -54,17 +53,17 @@ export default function Demo() {
 
                     <DropdownMenuPortal>
                         <DropdownMenuSubContent className="flex z-40 flex-col gap-2 bg-primary rounded-xl " sideOffset={10}>
-                            <Button onClick={() => login('tarek@gmail.com', '111')}>
+                            <Button onClick={() => callLogin('tarek@gmail.com', '111')}>
                                 <div className="text text-xl w-full flex justify-start">
                                 login as Organizer : Tarek Alouzey
                                 </div>
                             </Button>
-                            <Button onClick={() => login(2)}>
+                            <Button onClick={() => callLogin('ahmad@gmail.com', '111')}>
                                 <div className="text text-xl w-full flex justify-start">
                                 login as Byte Kights Team Leader : Ahmad Ali
                                 </div>
                             </Button>
-                            <Button onClick={() => login(2)}>
+                            <Button onClick={() => callLogin('abd@gmail.com', '111')}>
                                 <div className="text text-xl w-full flex justify-start">
                                 login as Byte Kights Member: Abdelrhman Khaled
                                 </div>
@@ -78,7 +77,7 @@ export default function Demo() {
 
                     <DropdownMenuSubTrigger className='flex items-center gap-2'>
                         <UsersThree size={30}></UsersThree>
-                        <Button className="w-full" onClick={() => login(1)}>
+                        <Button className="w-full" onClick={() => navigateToEvent(1)}>
                         <div className="text text-xl">
                             Writing Marathon
                         </div>
@@ -87,19 +86,19 @@ export default function Demo() {
                       
                     <DropdownMenuPortal>
                         <DropdownMenuSubContent className="text-2xl z-40 flex flex-col gap-2 bg-primary rounded-xl " sideOffset={10}>
-                        <Button onClick={() => login(2)}>
+                        <Button onClick={() => callLogin('ahmad@gmail.com', '111')}>
                             <div className="text text-xl w-full flex justify-start">
                             login as organizer : Ahmad Ali
                             </div>
                         </Button>
-                        <Button onClick={() => login(2)}>
+                        <Button onClick={() => callLogin('mohammed@gmail.com', '111')}>
                             <div className="text text-xl w-full flex justify-start">
                             login as RomanWritersTeam Leader : Mohammed Mansour
                             </div>
                         </Button>
-                        <Button onClick={() => login(2)}>
+                        <Button onClick={() => callLogin('adam@gmail.com')}>
                             <div className="text text-xl w-full flex justify-start">
-                            login as RomanWritersTeam member : Mahmoud Adam
+                            login as RomanWritersTeam member : Adam Mahmoud
                             </div>
                         </Button>
                         </DropdownMenuSubContent>

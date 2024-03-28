@@ -11,19 +11,8 @@ import '../../app/signup.css';
 
 export default function SignupPage() {
 
-
-  const checkAuth = () => {
-    fetch('http://localhost:3000/api/v1/check-auth', { credentials: "include"}).then(console.log)
-  }
-
-  const logout = () => {
-    fetch('http://localhost:3000/api/v1/logout', { credentials: "include"}).then(console.log)
-  }
-
-  fetch('http://localhost:3000/api/v1/get-cookie', { credentials: "include"}).then(console.log)
-
   return (
-    <section className="signup-page">
+    <section className="flex h-full signup-page">
       <div className="info">
         <img src="src/assets/logo/logo-dark.svg" alt="Logo" />
         <h1>زمرّد</h1>
@@ -86,8 +75,8 @@ export default function SignupPage() {
             </div>
           </div>
         </div>
-        <button className="submit-btn" type="button" onClick={() => checkAuth()}>انشئ</button>
-        <button className="submit-btn" type="button" onClick={() => logout()}>سجل خروج</button>
+        <button className="submit-btn" type="button">انشئ</button>
+        <button className="submit-btn" type="button">سجل خروج</button>
       </form>
     </section>
   );

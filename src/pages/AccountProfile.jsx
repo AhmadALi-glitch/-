@@ -1,25 +1,26 @@
 import { httpClient } from '@/http';
 import '../../app/profile.css';
 import { DiamondsFour } from 'phosphor-react';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { convertUtcToLocale, getMyTimeZone } from '@/utils/date';
+import { accountContext } from '@/state/account';
 
 export default function AccountProfilePage() {
 
-  const [loading, setLoading] = useState(true)
-  const [accountData, setAccountData] = useState({})
+  const [loading, setLoading] = useState(false)
+  const accountData = useContext(accountContext)
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    httpClient.get(`/account/get-my-info/${getMyTimeZone().replace('/','-')}`).then((result) => {
-      console.log(result)
-      setAccountData(result.data)
-      setLoading(false)
-    }).catch((err) => {
-      console.log(err)
-    })
+  //   httpClient.get(`/account/get-my-info/${getMyTimeZone().replace('/','-')}`).then((result) => {
+  //     console.log(result)
+  //     setAccountData(result.data)
+  //     setLoading(false)
+  //   }).catch((err) => {
+  //     console.log(err)
+  //   })
     
-  }, [])
+  // }, [])
 
   return (
       loading ? 
