@@ -37,3 +37,14 @@ export function callCreateEvent(form) {
     return httpClient.post("/event/create", {...form, timezone: getMyTimeZone()})
 }
 
+
+export function checkIsMember(teamId, eventId) {
+    return httpClient.get(`/event/is-member/${teamId}/${eventId}`)
+}
+
+
+export function joinRequest(teamId, eventId) {
+    return httpClient.get(`/event/join-request/${teamId}/${eventId}`)
+}
+
+

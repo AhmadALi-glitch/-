@@ -1,4 +1,4 @@
-import { UsersThree, Flag, House, UserCircle } from "phosphor-react";
+import { UsersThree, Flag, House, UserCircle, Bell } from "phosphor-react";
 import { useState } from "react";
 import '../../app/header.css';
 import { accountContext } from "@/state/account"
@@ -21,7 +21,9 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Calendar } from "@/components/ui/calendar";
 import { format } from "date-fns";
 import { callCreateEvent } from "@/service/event";
-
+import { DropdownMenu, DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
+import { DropdownMenuContent } from "@/components/ui/dropdown-menu";
+import Notifications from "./notifications";
 
 export default function Navbar() {
 
@@ -51,6 +53,7 @@ export default function Navbar() {
     callCreateEvent(eventForm).then(console.log)
   }
 
+
   return (
     <>
         <div className="pages flex items-center justify-end gap-2 basis-[20%]">
@@ -70,6 +73,17 @@ export default function Navbar() {
             <div onClick={() => navigate('/login')} className={isActive === "/login" ? "active cursor-pointer bg-[#A8BE69] flex items-center gap-5 w-[200px] pr-2 p-[2px] rounded-[4px] events-nav" : "flex cursor-pointer items-center gap-5 teams-nav"} >
               <LogIn size={25}/>
               <span>تبديل الحساب</span>
+            </div>
+            <div className={"cursor-pointer bg-[#A8BE69] flex items-center gap-5 p-[2px] rounded-[4px] events-nav"} >
+              <DropdownMenu>
+                <DropdownMenuTrigger>
+                  <Bell size={25}/>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent sideOffset={15} className="flex flex-col items-center gap-2 font-extrabold text-white rounded-xl p-2 w-[300px]">
+                    <div className="bells-head text-xl font-main">الإشعارات</div> 
+                    <Notifications></Notifications>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
           </div>
 

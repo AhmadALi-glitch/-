@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useSearchParams } from "react-router-dom"
 import { Plus, Signpost, Flag, Circle, DiamondsFour, User } from "phosphor-react"
 import { Checks } from "phosphor-react"
@@ -9,16 +9,17 @@ import { Tooltip, TooltipProvider, TooltipContent, TooltipTrigger } from "@/comp
 import { convertUtcToLocale } from "@/utils/date"
 import { httpClient } from "@/http"
 import { getCheckpointsInADay } from "@/state/checkpoints"
-import { CircleDotDashed, DoorClosed, FolderClosed, Glasses, PanelTopClose, RefreshCw, Save, SidebarClose, X } from "lucide-react"
-import { Close } from "@radix-ui/react-popover"
-import { Select } from "@radix-ui/react-select"
+import { CircleDotDashed, RefreshCw, Save, X } from "lucide-react"
 import { ToggleGroup, ToggleGroupItem } from "@radix-ui/react-toggle-group"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { callCheckACheckpoint, callSaveCheckpoint } from "@/service/checkpoint"
 import { easings, useSpring } from "@react-spring/web"
 import { animated } from "@react-spring/web"
-import { finishAnEvent } from "@/service/event"
+import { checkIsMember, finishAnEvent, joinRequest } from "@/service/event"
+import { accountContext } from "@/state/account"
+import Lottie from "react-lottie"
+import loadingAnimationData from "../assets/lottiefiles/loading.json"
 
 export default function EventPage() {
 
@@ -36,11 +37,21 @@ export default function EventPage() {
     const [loading, setLoading] = useState(true)
 
     let [role, setRole] = useState(null);
+    let [isMember, setIsMember] = useState('unknown')
+    let accountState = useContext(accountContext)
+
 
     useEffect(() => {
 
+        
         // Second Get The Information Of The Event
         httpClient.get(`/event/${params.get('event_id')}`).then((result) => {
+
+
+            checkIsMember(accountState.team_id, result.data.events.id).then((res) => {
+                console.log("MEMBER l ", res.data)
+                setIsMember(res.data)
+            })
 
             setRole(result.data.role)
             setEventInfo(result.data.events)
@@ -268,7 +279,10 @@ export default function EventPage() {
             return ex.executor.id
         })
         console.log('CHecking A CHeckpoint', checkpoint, executorsIds)
-        callCheckACheckpoint(checkpoint.id, executorsIds).then(console.log)
+        let oldCheckpoints =  checkpointsStatus[`${checkpoint.create_date_utc}|${checkpoint.team_id}`];
+        callCheckACheckpoint(checkpoint.id, executorsIds).then(() => {
+            setCheckpointsStatus((oldState) => {return {...oldState, [`${checkpoint.create_date_utc}|${checkpoint.team_id}`] : --oldCheckpoints } })
+        })
     }
 
 
@@ -277,11 +291,26 @@ export default function EventPage() {
         finishAnEvent(eventInfo, teamsEvaluation).then(console.log)
     }
 
-    
+
+    let loadingAnimationOptions = {
+        animationData: loadingAnimationData,
+        autoplay: true,
+        loop: true,
+        isPausedWhenClick: false
+    }
+
+
+    let saveJoinRequest = () => {
+        joinRequest(accountState.team_id, eventInfo.id).then(() => {
+            setIsMember("onHold")
+        }).catch(console.log)
+    }
+
+
     return (
         <>
 
-            {!loading ? 
+            {!loading ?
 
 
             <div className="max-h-[800px] overflow-auto flex flex-col justify-between gap-3 items-center">
@@ -296,7 +325,11 @@ export default function EventPage() {
                             </div>
                             <div className="separator rounded-full h-[40%] opacity-[0.1] w-[5px] bg-primary"></div>
                             <div className="actions">
-                                <button className="join text-primary">انضم</button>
+                                {
+                                    accountState.isTeamLeader && role != 'organizer' ? <button className="join text-primary">
+                                        { isMember == "unknown" ? <Lottie options={loadingAnimationOptions} isClickToPauseDisabled={true} width={40}/> : isMember == "onHold" ?  <div>تم ارسال طلب انضمامك</div> : isMember ? <></> :  <div onClick={() => {saveJoinRequest()}}>انضم</div> }
+                                    </button> : <></>
+                                }
                             </div>
                         </div>
                         <div className="tags flex items-center text-sm gap-2">
@@ -446,10 +479,13 @@ export default function EventPage() {
                                                 </span>
                                             </div>
                                             <div className="checkpoint-evaluating flex justify-start items-center gap-4">
-                                                <button onClick={() => saveCheckpoint()} className="check flex justify-center gap-5 items-center bg-primary w-fit p-1 text-black text-[15px] rounded-md self-end">
-                                                   سجّل 
-                                                   <Save />
-                                                </button>
+                                                { 
+                                                    savingCheckpoint ? <Lottie options={loadingAnimationOptions} width={50}/> :
+                                                    <button onClick={() => saveCheckpoint()} className="check flex justify-center gap-5 items-center bg-primary w-fit p-1 text-black text-[15px] rounded-md self-end">
+                                                        سجّل 
+                                                        <Save />
+                                                    </button>
+                                                }
                                             </div>
                                         </div>
                                     </div>
@@ -475,8 +511,13 @@ export default function EventPage() {
                                         })
                                     }
                                 </thead>
+                                {
+
+                                eventInfo.participants.length ?
                                 <tbody>
                                     {
+
+
                                         eventInfo.participants.map((participant, i) => {
                                             return <>
                                                 <tr key={i}>
@@ -684,20 +725,27 @@ export default function EventPage() {
                                                 </tr>
                                             </>
                                         })
-                                    }
 
+
+                                    }                                
+
+                                
                                 </tbody>
+
+                                    : <div className="text-5xl flex items-center justify-center backdrop-blur-lg absolute z-10 font-extrabold w-[100%] h-full">لا يوجد متسابقين حتى الآن</div>
+                                }
                             </table>
 
                         </animated.div>
                         
-                        <div className="finish max-h-full flex items-center mt-20 pt-2 pr-1 w-[60px] border-2 border-[#3337] border-opacity-[0.1] rounded-lg">
+                        <div className="finish max-h-full flex items-center mt-24 pt-2 pr-1 w-[60px] border-2 border-[#3337] border-opacity-[0.1] rounded-lg">
                             <button onClick={() => toggleEventSection()} className="rotate-90">
                                 النتيجة
                             </button>
                         </div>
 
                         <animated.div style={{...evaluatingSectionSprigns}} className="flex flex-col items-center justify-start pt-20 gap-10 overflow-hidden evaluating-section">
+                            
                             {
                                 role == 'organizer' ?  
                                 <>
