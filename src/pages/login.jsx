@@ -27,7 +27,7 @@ export default function Login() {
         <>
             <div className="wrapper">
                 <div className="pt-10 content">
-                        <Demo></Demo>
+                    <Demo></Demo>
                 </div>
             </div>
         </>

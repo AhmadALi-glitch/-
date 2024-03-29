@@ -11,7 +11,8 @@ module.exports = {
   prefix: "",
   theme: {
     fontFamily: {
-      'main': 'typeface'
+      'main': 'typeface',
+      'logo': 'logo'
     },
     container: {
       center: true,

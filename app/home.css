@@ -26,7 +26,7 @@
 
 .responsive-table table::before {
   content: "";
-  background-color: #C9DF8A;
+  background-color: #c8df8a0a;
   width: 1px;
   height: 100%;
   position: absolute;
@@ -36,7 +36,7 @@
 }
 
 .responsive-table table thead tr {
-  border-bottom: 1px solid #C9DF8A;
+  border-bottom: 1px solid #c8df8a11;
 }
 
 .responsive-table table thead td:first-of-type {
@@ -67,7 +67,7 @@
 .responsive-table table .box {
   width: 305px;
   padding: 15px;
-  border: 2px solid rgb(201, 223, 138, 0.6);
+  border: 2px solid rgba(200, 223, 138, 0.26);
   border-radius: 10px;
   margin: 10px;
 }

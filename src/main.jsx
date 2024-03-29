@@ -18,6 +18,7 @@ import Login from './pages/login'
 import Navbar from './pages/Navbar'
 import Demo from './demo'
 import App from './pages/App'
+import CreateEventPage from './pages/createEvent'
 
 const router = createBrowserRouter([
   {
@@ -74,6 +75,12 @@ const router = createBrowserRouter([
     path: '/login',
     element : <App>
       <Login />
+    </App>
+  },
+  {
+    path: '/create-event',
+    element : <App>
+      <CreateEventPage />
     </App>
   }
 ])

@@ -127,7 +127,7 @@ export default function App({children}) {
 
                 <accountContext.Provider value={account}>
                   <accountReducerContext.Provider value={setAccount}>
-                  
+
 
                           { loading ?
 
@@ -143,11 +143,10 @@ export default function App({children}) {
                                 <div className="w-full border-b-[3px] border-[#A8BE69] pb-[1px] border-opacity-[0.1] flex justify-between items-center gap-2 text-[#C9DF8A]">
 
                                   <div className="logo basis-[95%]">
-                                      <img width={50} src="src/assets/logo/logo-dark.svg"></img>
+                                      <img width={50} src="src/assets/logo/logo.svg"></img>
                                   </div>
 
                                   { account.email ? <>
-                                      <Demo></Demo>
                                       <Navbar />
                                     </> : <></>
                                   }
