@@ -10,6 +10,7 @@ import WelcomePage from './pages/Welcome'
 import SignupPage from './pages/Signup'
 import GuidePage from './pages/Guide'
 import EventPage from './pages/Event'
+import Teams from './pages/Teams'
 import "../app/profile.css"
 import "../app/components.css"
 import LoadingPage from './pages/loadingPage'
@@ -63,6 +64,12 @@ const router = createBrowserRouter([
     path : "/event",
     element : <App>
       <EventPage/>
+    </App>
+  },
+  {
+    path : "/teams",
+    element : <App>
+      <Teams />
     </App>
   },
   {

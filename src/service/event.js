@@ -31,3 +31,9 @@ export function finishAnEvent(eventInfo, evaluation) {
         }
     })
 }
+
+
+export function callCreateEvent(form) {
+    return httpClient.post("/event/create", {...form, timezone: getMyTimeZone()})
+}
+
