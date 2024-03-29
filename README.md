@@ -1,5 +1,6 @@
 
+MAKE SURE YOU INSTALLED THE BACK END PART ALSO >> [[https://github.com/AhmadALi-glitch/emerald-restfulapi]]
 
 # first install node packages using : npm install
-# compose the docker postgresql database using : docker compose -f
-# run the backend using : npm run dev
+# run the project using : npm run dev
+# make sure it hosts on : localhost:5173
